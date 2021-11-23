@@ -2,7 +2,15 @@ import React from "react";
 import "./GamePage.css";
 import { Link } from "react-router-dom";
 
+// , {mode: "no-cors",}
+
 function GamePage() {
+  function openstory() {
+    fetch("http://adventurehub-prod.herokuapp.com/stories")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
+
   return (
     <>
       <div className="gameContainer">
@@ -16,7 +24,9 @@ function GamePage() {
         <div className="gameBar">
           <h1>Game</h1>
           <div className="buttonContainer">
-            <button className="option A">A</button>
+            <button onClick={openstory} className="option A">
+              A
+            </button>
             <button className="option B">B</button>
             <button className="option C">C</button>
           </div>
