@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function GamePage() {
   function openstory() {
-    fetch("http://adventurehub-prod.herokuapp.com/stories")
+    fetch("http://adventurehub-dev.herokuapp.com/login")
       .then((response) => response.json())
       .then((data) => console.log(data));
   }
