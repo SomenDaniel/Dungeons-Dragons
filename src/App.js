@@ -6,7 +6,7 @@ import RegistrationPage from "./components/RegistrationPage";
 import LoginPage from "./components/LoginPage";
 import UserPage from "./components/UserPage";
 import MainPage from "./components/MainPage";
-import GamePage from "./components/GamePage";
+import ListGamesPage from "./components/ListGamesPage";
 import CreatorPage from "./components/CreatorPage";
 
 function App() {
@@ -14,10 +14,11 @@ function App() {
     <>
       <Router>
         <Routes>
+          <Route path="/game/:id" element={<LoginPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/registration" element={<RegistrationPage />}></Route>
           <Route path="/create" element={<CreatorPage />}></Route>
-          <Route path="/game" element={<GamePage />}></Route>
+          <Route path="/game" element={<ListGamesPage />}></Route>
           <Route path="/mainpage" element={<MainPage />}></Route>
           <Route path="/user" element={<UserPage />}></Route>
           <Route path="/" element={<WelcomePage />}></Route>
