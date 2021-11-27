@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RegistrationPage from "./RegistrationPage";
+import RegistrationPage from "./user/RegistrationPage";
 import "./WelcomePage.css";
 
 function WelcomePage() {
@@ -29,7 +29,7 @@ function WelcomePage() {
             </Link>
           </button>
           <button>
-            <Link className="link" to="/game">
+            <Link className="link" to="/gamelist">
               game
             </Link>
           </button>

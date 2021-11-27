@@ -21,7 +21,7 @@ function GamePage() {
   }
 
   function xd() {
-    fetch("http://adventurehub-dev.herokuapp.com/story/id/30")
+    fetch("http://adventurehub-dev.herokuapp.com/storyInfo")
       .then((response) => {
         return response.json();
       })
@@ -32,14 +32,26 @@ function GamePage() {
     <>
       <div className="container">
         <header>
-          <h1>header</h1>
+          <button>Logout</button>
         </header>
+        <div>
+          <h1>Stories:</h1>
+        </div>
         <div className="stories">
           <ul>
-            {stories.map((data) => (
+            {stories.map((game) => (
               <li>
-                {data.title}
-                <button>join game(link egy másik oldalra)</button>
+                {game.title}
+                <button>
+                  <Link className="link" to={`/game/${game.uuid}/start`}>
+                    play
+                  </Link>
+                </button>
+                <button>
+                  <Link className="link" to={`/game/${game.id}/info`}>
+                    info
+                  </Link>
+                </button>
               </li>
             ))}
           </ul>
