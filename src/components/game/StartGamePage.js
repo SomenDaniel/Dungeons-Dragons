@@ -4,57 +4,67 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function StartGamePage() {
-  const { id } = useParams();
+  const { uuid } = useParams();
+  const storyUuid = uuid;
   const [game, setGame] = useState({});
   const [options, setOptions] = useState([]);
-  // const [session, setSession] = useState({});
-  let storyUuid = id;
-  // let options = [];
-  // let ops = <ul></ul>;
+  const [session, setSession] = useState([]);
+  const [start, setStart] = useState(true);
+  // let start = true;
+  // átszervezés alatt
+
+  useEffect(() => {
+    startGame();
+  }, []);
 
   function startGame() {
-    fetch("http://adventurehub-dev.herokuapp.com/startGame", {
+    fetch("https://adventurehub-dev.herokuapp.com/startGame", {
       method: "POST",
-      body: JSON.stringify(storyUuid),
+      body: JSON.stringify({ storyUuid: storyUuid }),
     })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        setGame(...data);
+        setGame(data);
+        console.log(data);
       });
   }
+  console.log(storyUuid);
 
-  function setUp() {
-    // options = game.currentBranch.goesTo;
-    // ops = (
-    //   <ul>
-    //     {options.map((option) => (
-    //       <li>
-    //         {option.text}
-    //         {option.goToId}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // );
-    // document.querySelector(".optionSelector").innerHTML = JSON.stringify(ops);
+  function starter() {
     setOptions(game.currentBranch.goesTo);
-    console.log(options);
+    setSession(game.sessionId);
+    setStart(false);
+    document.querySelector(".starterButton").style.display = "none";
   }
-  useEffect(() => {
-    startGame();
-  }, []);
+
   console.log(game);
+  console.log(session);
+  console.log(options);
+
+  let branchId = 1; // gotoid-t branchid ként nevezd el.
+
   return (
     <>
-      <h1>{id}</h1>
-      <button onClick={setUp}>start</button>
-      <div className="optionSelector">
+      <h1>{uuid}</h1>
+      <div>
+        {start && (
+          <button className="starterButton" onClick={starter}>
+            start game
+          </button>
+        )}
+      </div>
+      <div>
         <ul>
           {options.map((option) => (
             <li>
               {option.text}
-              {option.goToId}
+              <button>
+                <Link className="link" to={`/game/${session}/${option.goToId}`}>
+                  continue
+                </Link>
+              </button>
             </li>
           ))}
         </ul>

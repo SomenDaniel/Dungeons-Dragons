@@ -13,7 +13,7 @@ function GamePage() {
   }, []);
 
   function listStories() {
-    fetch("http://adventurehub-dev.herokuapp.com/stories")
+    fetch("https://adventurehub-dev.herokuapp.com/stories")
       .then((response) => {
         return response.json();
       })
@@ -21,13 +21,14 @@ function GamePage() {
   }
 
   function xd() {
-    fetch("http://adventurehub-dev.herokuapp.com/storyInfo")
+    fetch("https://adventurehub-dev.herokuapp.com/stories")
       .then((response) => {
         return response.json();
       })
       .then((data) => console.log(data));
   }
 
+  console.log(stories);
   return (
     <>
       <div className="container">
