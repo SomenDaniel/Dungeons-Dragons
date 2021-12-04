@@ -49,7 +49,7 @@ function GamePage() {
                   </Link>
                 </button>
                 <button>
-                  <Link className="link" to={`/game/${game.id}/info`}>
+                  <Link className="link" to={`/game/${game.uuid}/info`}>
                     info
                   </Link>
                 </button>
