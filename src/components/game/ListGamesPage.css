@@ -1,52 +1,79 @@
-.gameContainer {
-  position: absolute;
+.listContainer {
+  overflow: auto;
+  color: white;
+  position: fixed;
   width: 100%;
   height: 100%;
-}
-
-.navbar {
-  position: fixed;
-  top: 0%;
   left: 0;
-  bottom: 90%;
+  top: 0;
+  background-color: black;
+}
+
+.listHeader {
+  display: grid;
+  grid-template-columns: 5% 25% 70%;
+  height: 150px;
+}
+
+.listLogo {
+  width: 75px;
+  height: 75px;
+  display: inline-block;
+  margin-top: 3%;
+  margin-left: 3%;
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+.listNavigation {
+  grid-column-start: 3;
+  grid-column-end: 3;
+  text-align: right;
+}
+
+.welcomeMessage {
+  margin-top: 8%;
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: 2;
+}
+
+.storyContainer {
+  display: grid;
+  grid-template-rows: 15% 85%;
+  font-size: 10px;
+}
+
+.storyIntro {
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.storyIntro h1 {
+  text-align: center;
+}
+
+.storyIntro button {
+  color: white;
+  text-align: center;
   width: 100%;
-  background-color: white;
-  border-bottom: 1px solid black;
 }
 
-.gameBar {
-  position: fixed;
-  top: 10%;
-  left: 0;
-  bottom: 0%;
-  width: 100%;
-  background-color: white;
+.stories {
+  grid-row-start: 2;
+  grid-row-end: 2;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-left: 3%;
+  border-left: 3px solid greenyellow;
+  border-right: 3px solid greenyellow;
 }
 
-.buttonContainer {
-  position: fixed;
-  top: 80%;
-  left: 0;
-  bottom: 0%;
-  width: 100%;
-  background-color: white;
+.gameData {
+  display: grid;
+  grid-template-columns: 40% 40% 10% 10%;
 }
 
-.option {
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  bottom: 50%;
-}
-
-.A {
-  left: 10%;
-}
-
-.B {
-  left: 45%;
-}
-
-.C {
-  right: 10%;
+.gameData p {
+  align-self: center;
 }

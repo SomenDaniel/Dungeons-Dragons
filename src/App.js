@@ -10,27 +10,37 @@ import CreatorPage from "./components/CreatorPage";
 import PlayingPage from "./components/game/PlayingPage";
 import GameInfoPage from "./components/game/GameInfoPage";
 import StartGamePage from "./components/game/StartGamePage";
+import { LoginProvider } from "./components/user/LoginContext";
+import FilterPage from "./components/game/FilterPage";
 
 function App() {
+  // ide nem kell authorization :
+  //   "/login",
+  // "/refreshToken",
+  // "/registration",
+  // "/storyInfo",
+  // "/storyInfo/{storyUuid}"
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/game/:uuid/start" element={<StartGamePage />}></Route>
-          <Route path="/game/:id/info" element={<GameInfoPage />}></Route>
-          <Route
-            path="/game/:sessionId/:goToId"
-            element={<PlayingPage />}
-          ></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/registration" element={<RegistrationPage />}></Route>
-          <Route path="/create" element={<CreatorPage />}></Route>
-          <Route path="/gamelist" element={<ListGamesPage />}></Route>
-          <Route path="/mainpage" element={<MainPage />}></Route>
-          <Route path="/user" element={<UserPage />}></Route>
-          <Route path="/" element={<WelcomePage />}></Route>
-        </Routes>
-      </Router>
+      <LoginProvider>
+        <Router>
+          <Routes>
+            <Route path="/game/:uuid/start" element={<StartGamePage />}></Route>
+            <Route path="/game/:id/info" element={<GameInfoPage />}></Route>
+            <Route
+              path="/game/:sessionId/:goToId"
+              element={<PlayingPage />}
+            ></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/registration" element={<RegistrationPage />}></Route>
+            <Route path="/create" element={<FilterPage />}></Route>
+            <Route path="/gamelist" element={<ListGamesPage />}></Route>
+            <Route path="/mainpage" element={<MainPage />}></Route>
+            <Route path="/user" element={<UserPage />}></Route>
+            <Route path="/" element={<WelcomePage />}></Route>
+          </Routes>
+        </Router>
+      </LoginProvider>
     </>
   );
 }

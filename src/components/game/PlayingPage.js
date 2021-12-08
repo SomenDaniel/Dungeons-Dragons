@@ -12,7 +12,7 @@ function PlayingPage() {
   const [text, setText] = useState([]);
   // let start = true;
   // // átszervezés alatt
-
+  const token = localStorage.getItem("key");
   useEffect(() => {
     setUp();
   }, []);
@@ -31,7 +31,10 @@ function PlayingPage() {
     fetch(`https://adventurehub-dev.herokuapp.com/game/${sessionId}`, {
       // a második ugyan olyan lekérésnél hibát fog dobni.
       method: "PUT",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ branchId }),
     })
       .then((response) => {

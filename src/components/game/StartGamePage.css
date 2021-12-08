@@ -1,0 +1,85 @@
+.gameContainer {
+  overflow: auto;
+  color: white;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: black;
+}
+
+.gamepageLogo {
+  width: 75px;
+  height: 75px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  margin-top: 3%;
+  margin-left: 3%;
+}
+
+.gameHeader {
+  display: grid;
+  grid-template-columns: 5% 25% 70%;
+  height: 150px;
+}
+
+.welcomeMessage {
+  margin-top: 8%;
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: 2;
+}
+
+.listNavigation {
+  grid-column-start: 3;
+  grid-column-end: 3;
+  text-align: right;
+}
+
+.gameTitle {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.gameText {
+  /* width: 100%; */
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 100px;
+  padding-right: 5%;
+  padding-left: 5%;
+  border-left: 3px solid greenyellow;
+  border-right: 3px solid greenyellow;
+  text-align: center;
+}
+
+.gameText h1 {
+  display: table;
+  text-align: center;
+  font-size: 20px;
+  width: fit-content;
+}
+
+.gameOption {
+  text-align: center;
+}
+
+.gameOption button {
+  height: 50px;
+  width: 75%;
+  font-size: 10px;
+}
+
+.optionContainer {
+  height: 100%;
+}
+
+.optionContainer ul {
+  height: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
