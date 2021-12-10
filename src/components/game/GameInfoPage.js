@@ -44,6 +44,15 @@ function GameInfoPage() {
                 Profile
               </Link>
             </button>
+            <button className="back">
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                className="link"
+                to="/gamelist"
+              >
+                Back
+              </Link>
+            </button>
             <Logout />
           </div>
         </header>

@@ -65,7 +65,7 @@ function WelcomePage() {
 
             <div className="logRegContainer">
               <h3 className="loginText">Don't hesitate, play!</h3>
-              <button className="loginButton">
+              <button className="registrationButton">
                 <Link
                   style={{ textDecoration: "none", color: "white" }}
                   to="/login"
@@ -76,7 +76,7 @@ function WelcomePage() {
             </div>
             <div className="logRegContainer">
               <h3 className="regText">Don't have an account?</h3>
-              <button className="regButton">
+              <button className="registrationButton">
                 <Link
                   style={{ textDecoration: "none", color: "white" }}
                   className="link"

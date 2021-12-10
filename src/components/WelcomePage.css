@@ -75,16 +75,16 @@ Link {
 
 .loginText {
   display: inline-block;
-  margin-right: 110px;
+  /* margin-right: 100px; */
 }
 
 .regText {
   display: inline-block;
-  margin-right: 90px;
 }
 
-.regButton {
-  /* margin-left: 10%; */
+.registrationButton {
+  width: 100px;
+  margin-left: 20px;
 }
 
 .loginButton {
