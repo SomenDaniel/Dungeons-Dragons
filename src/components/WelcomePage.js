@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import RegistrationPage from "./user/RegistrationPage";
 import "./WelcomePage.css";
 import logo from "./logo.png";
 
 function WelcomePage() {
+  const token = localStorage.getItem("key");
+  useEffect(() => {
+    testUpload();
+  }, []);
+  function testUpload() {
+    fetch(`https://adventurehub-dev.herokuapp.com/testupload`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        console.log("siker");
+      });
+  }
+
   return (
     <>
       <div className="container">
@@ -29,49 +48,13 @@ function WelcomePage() {
                 Login
               </Link>
             </button>
-            <button>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                className="link"
-                to="/gamelist"
-              >
-                game
-              </Link>
-            </button>
             {/* <button>
               <Link
                 style={{ textDecoration: "none", color: "white" }}
                 className="link"
-                to="/user"
-              >
-                User
-              </Link>
-            </button>
-            <button>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                className="link"
-                to="/mainpage"
-              >
-                mainpage
-              </Link>
-            </button>
-            <button>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                className="link"
                 to="/gamelist"
               >
                 game
-              </Link>
-            </button>
-            <button>
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                className="link"
-                to="/create"
-              >
-                create
               </Link>
             </button> */}
           </div>

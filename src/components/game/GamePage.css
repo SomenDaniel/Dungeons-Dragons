@@ -83,3 +83,11 @@
 ul {
   list-style-type: none;
 }
+
+.winContainer {
+  text-align: center;
+}
+
+.failContainer {
+  text-align: center;
+}

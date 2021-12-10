@@ -1,0 +1,69 @@
+.welcome {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.formContainer {
+  text-align: center;
+}
+
+.username {
+  margin-bottom: 50px;
+}
+
+.email {
+  margin-top: 50px;
+}
+
+.email label {
+  margin-right: 50px;
+}
+
+.logButton {
+  font-size: 15px;
+  margin-bottom: 50px;
+}
+
+.regOption p {
+  display: inline-block;
+  margin-right: 100px;
+}
+
+.regButton {
+  width: 400px;
+}
+
+.failMessage {
+  margin-top: 10px;
+  font-size: 10px;
+  color: red;
+}
+
+.verification {
+  margin-top: 50px;
+  color: green;
+}
+
+.registButton {
+  margin-top: 50px;
+  font-size: 15px;
+  text-align: center;
+  width: 500px;
+}
+
+.playButton {
+  color: white;
+  margin-top: 50px;
+}
+
+.listFinished {
+  color: white;
+}
+
+.infoIntro {
+  text-align: center;
+}
+
+.infoContainer {
+  width: 100%;
+}

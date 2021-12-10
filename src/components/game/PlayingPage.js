@@ -2,28 +2,39 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./GamePage.css";
+import logo from "../logo.png";
+import Victory from "./Victory";
+import Fail from "./Fail";
+import Logout from "../Logout";
 
 function PlayingPage() {
   const { sessionId } = useParams();
   const { goToId } = useParams();
-  // const storyUuid = uuid;
+
   const [game, setGame] = useState([]);
+  const [title, setTitle] = useState([]);
   const [type, setType] = useState([]);
   const [text, setText] = useState([]);
-  // let start = true;
-  // // átszervezés alatt
+  const storyUuid = localStorage.getItem("storyUuid");
   const token = localStorage.getItem("key");
+  const username = localStorage.getItem("username");
+
   useEffect(() => {
     setUp();
+    getData();
   }, []);
 
-  // function starter() {
-  //   setOptions(game.currentBranch.goesTo);
-  //   setStart(false);
-  //   document.querySelector(".starterButton").style.display = "none";
-  // }
-  // console.log(game);
-  // console.log(options);
+  function getData() {
+    fetch(`https://adventurehub-dev.herokuapp.com/storyInfo/${storyUuid}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setTitle(data.title);
+      });
+  }
 
   let branchId = Number(goToId); // gotoid-t branchid ként nevezd el.
   // current branch typeok: 'DEAD_END','DIVERGE', 'WINNER'
@@ -55,42 +66,55 @@ function PlayingPage() {
   // gotoid request body , sessionid url
   return (
     <>
-      <h1>{sessionId}</h1>
-      <h1>{goToId}</h1>
-      <div>
-        <h1>{text}</h1>
-        <ul>
-          {type === "DIVERGE"
-            ? game.map((option) => (
-                <li>
-                  {option.text}
-                  <button onClick={refreshPage}>
-                    <Link
-                      className="link"
-                      to={`/game/${sessionId}/${option.goToId}`}
-                    >
-                      continue
-                    </Link>
-                  </button>
-                </li>
-              ))
-            : ""}
-          {/* {game.map((option) => (
-            <li>
-              {option.text}
-              <button onClick={refreshPage}>
-                <Link
-                  className="link"
-                  to={`/game/${sessionId}/${option.goToId}`}
-                >
-                  continue
-                </Link>
-              </button>
-            </li>
-          ))} */}
-        </ul>
-        <h1>{type === "DEAD_END" ? "Game Over!" : ""}</h1>
-        <h1>{type === "WINNER" ? "You Win!" : ""}</h1>
+      <div className="gameContainer">
+        <header className="gameHeader">
+          <img className="gamepageLogo" src={logo} alt="logo" />
+          <p className="welcomeMessage">{`Hey ${username}!`}</p>
+          <div className="listNavigation">
+            <button>
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                className="link"
+                to="/user"
+              >
+                Profile
+              </Link>
+            </button>
+            <Logout />
+          </div>
+        </header>
+        <div className="gameZone">
+          <h1 className="gameTitle">{title}</h1>
+          <div className="gameText">
+            <h1>{text}</h1>
+          </div>
+          <div className="optionContainer">
+            <ul>
+              {type === "DIVERGE"
+                ? game.map((option) => (
+                    <li className="gameOption">
+                      <button onClick={refreshPage} style={{ color: "white" }}>
+                        <Link
+                          style={{ color: "green" }}
+                          className="link"
+                          to={`/game/${sessionId}/${option.goToId}`}
+                        >
+                          {`- ${option.text}`}
+                        </Link>
+                      </button>
+                    </li>
+                  ))
+                : ""}
+            </ul>
+          </div>
+
+          <div className="failContainer">
+            {type === "DEAD_END" ? <Fail /> : ""}
+          </div>
+          <div className="winContainer">
+            {type === "WINNER" ? <Victory /> : ""}
+          </div>
+        </div>
       </div>
     </>
   );

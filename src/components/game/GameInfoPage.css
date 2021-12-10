@@ -1,0 +1,33 @@
+.infoContainer {
+  overflow: auto;
+  color: white;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: black;
+}
+
+.infos div {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  color: green;
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+.gameDatas li {
+  margin-bottom: 1%;
+}
+
+.infos h1 {
+  text-align: center;
+  margin-left: 0;
+}
+
+.infoPlay {
+  text-align: center;
+  margin-top: 5%;
+}

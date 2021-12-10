@@ -1,41 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useLogin, useLoginUpdate } from "./LoginContext";
 import logo from "../logo.png";
+import { Link } from "react-router-dom";
+import "./LoginPage.css";
 
 function LoginPage() {
-  let [access, setAccess] = useState([]);
   let [username, setUsername] = useState([]);
   let [password, setPassword] = useState([]);
-  let [err, setErr] = useState(true);
-
-  const login = useLogin();
+  let [modal, setModal] = useState([]);
   const setLogin = useLoginUpdate();
-  // function test() {
-  //   // const username = "testElek";
-  //   // const password = "qwert123";
-
-  //   const loginData = new URLSearchParams();
-  //   loginData.append("username", username);
-  //   loginData.append("password", password);
-
-  //   fetch("https://adventurehub-dev.herokuapp.com/login", {
-  //     method: "POST",
-  //     // headers: { "content-type": "application/json" },
-  //     headers: {
-  //       "Content-Type": "application/x-www-form-urlencoded",
-  //     },
-  //     body: loginData.toString(),
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // elmentjük az access tokent.
-  //       setLogin(data.access_token);
-  //       localStorage.setItem("key", data.access_token);
-  //       console.log(data);
-  //     });
-  // }
 
   function usernameChange(event) {
     setUsername(event.target.value);
@@ -45,56 +18,9 @@ function LoginPage() {
     setPassword(event.target.value);
   }
 
-  // function submitLogin(event) {
-  //   event.preventDefault();
-  //   console.log(username, password);
-  //   // generate login form.
-  //   const loginData = new URLSearchParams();
-  //   loginData.append("username", username);
-  //   loginData.append("password", password);
-  //   setErr(true);
-  //   // login
-  //   try {
-  //     fetch("https://adventurehub-dev.herokuapp.com/login", {
-  //       method: "POST",
-  //       // headers: { "content-type": "application/json" },
-  //       headers: {
-  //         "Content-Type": "application/x-www-form-urlencoded",
-  //       },
-  //       body: loginData.toString(),
-  //     })
-  //       .then((response) => {
-  //         console.log(response.status);
-  //         if (response.ok === 200) {
-  //           setErr(false);
-  //           return response.json();
-  //         } else {
-  //           console.log("itt");
-  //           console.error("smthg went wrong.");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error.message);
-  //         // setErr(true);
-  //         console.log(err);
-  //       })
-  //       .then((data) => {
-  //         // elmentjük az access tokent és a felh nevét.
-  //         if (err === false) {
-  //           setAccess(data);
-  //         }
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   if (err === false) {
-  //     setLogin(access.access_token);
-  //     localStorage.setItem("key", access.access_token);
-  //     localStorage.setItem("username", username);
-  //     console.log("siker");
-  //   }
-  // }
-  function ideiglenes(event) {
+  let [message, setMessage] = useState("");
+
+  function login(event) {
     event.preventDefault();
     console.log(username, password);
     // generate login form.
@@ -110,6 +36,9 @@ function LoginPage() {
       body: loginData.toString(),
     })
       .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("sikertelen");
+        }
         console.log(response.status);
         return response.json();
       })
@@ -118,35 +47,108 @@ function LoginPage() {
         setLogin(data.access_token);
         localStorage.setItem("key", data.access_token);
         localStorage.setItem("username", username);
+        setMessage("success");
+      })
+      .catch((error) => {
+        setMessage(error.message);
       });
   }
+
   return (
     <>
-      <div className="loginContainer">
-        <header>
+      <div className="listContainer">
+        <header className="listHeader">
           <img className="listLogo" src={logo} alt="logo" />
+          <div className="listNavigation">
+            {message === "success" ? (
+              ""
+            ) : (
+              <button className="navButton">
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  className="link"
+                  to="/"
+                >
+                  back
+                </Link>
+              </button>
+            )}
+          </div>
         </header>
-        <div>
-          <h1>Welcome back!</h1>
+        <div className="welcome">
+          <h1>
+            {message === "success"
+              ? `Welcome back! ${username}`
+              : "Welcome back!"}
+          </h1>
         </div>
-        <div>
+        <div className="formContainer">
           <form>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              onChange={usernameChange}
-              value={username}
-            />
-            <label htmlFor="password">Password:</label>
-            <input
-              type="text"
-              id="password"
-              onChange={passwordChange}
-              value={password}
-            />
-            <button type="submit" onClick={ideiglenes}></button>
+            <div className="username">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                onChange={usernameChange}
+                value={username}
+              />
+            </div>
+            <div className="password">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                onChange={passwordChange}
+                value={password}
+              />
+            </div>
+            <p className="failMessage">
+              {message === "sikertelen" ? "Login failed" : ""}
+            </p>
+            <div>
+              {message === "success" ? (
+                ""
+              ) : (
+                <button
+                  className="logButton"
+                  style={{ color: "white" }}
+                  type="submit"
+                  onClick={login}
+                >
+                  Log in
+                </button>
+              )}
+            </div>
           </form>
+          <div className="regOption">
+            <div>
+              {message === "success" ? (
+                <button className="playButton">
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                      fontSize: "30px",
+                    }}
+                    className="link"
+                    to="/gamelist"
+                  >
+                    play
+                  </Link>
+                </button>
+              ) : (
+                <button className="regButton">
+                  <Link
+                    style={{ textDecoration: "none", color: "white" }}
+                    className="link"
+                    to="/registration"
+                  >
+                    Dont have an account?
+                  </Link>
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>

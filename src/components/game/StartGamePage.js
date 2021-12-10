@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../logo.png";
-import "./StartGamePage.css";
+import "./GamePage.css";
+import Logout from "../Logout";
 
 function StartGamePage() {
   const { uuid } = useParams();
@@ -13,6 +14,9 @@ function StartGamePage() {
   const [title, setTitle] = useState([]);
   const [text, setText] = useState([]);
   const token = localStorage.getItem("key");
+  const username = localStorage.getItem("username");
+
+  localStorage.setItem("storyUuid", storyUuid);
 
   useEffect(() => {
     startGame();
@@ -58,7 +62,7 @@ function StartGamePage() {
       <div className="gameContainer">
         <header className="gameHeader">
           <img className="gamepageLogo" src={logo} alt="logo" />
-          <p className="welcomeMessage">{`Hey username!`}</p>
+          <p className="welcomeMessage">{`Hey ${username}!`}</p>
           <div className="listNavigation">
             <button>
               <Link
@@ -69,15 +73,7 @@ function StartGamePage() {
                 Profile
               </Link>
             </button>
-            <button className="navButton">
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                className="link"
-                to="/login"
-              >
-                logout
-              </Link>
-            </button>
+            <Logout />
           </div>
         </header>
 
@@ -90,14 +86,13 @@ function StartGamePage() {
             <ul>
               {game.map((option) => (
                 <li className="gameOption">
-                  {/* {option.text} */}
                   <button style={{ color: "white" }}>
                     <Link
-                      style={{ color: "white" }}
+                      style={{ color: "green" }}
                       className="link"
                       to={`/game/${session}/${option.goToId}`}
                     >
-                      {option.text}
+                      {`- ${option.text}`}
                     </Link>
                   </button>
                 </li>

@@ -1,70 +1,122 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import logo from "../logo.png";
+import { Link } from "react-router-dom";
 
 function RegistrationPage() {
-  // ez a sorrend
-  //
+  let [username, setUsername] = useState([]);
+  let [password, setPassword] = useState([]);
+  let [email, setEmail] = useState([]);
+  let [message, setMessage] = useState("");
 
-  // useEffect(() => {
-  //   register();
-  // }, []);
+  function usernameChange(event) {
+    setUsername(event.target.value);
+  }
 
-  // const email = "asddd@ddd.aa";
-  // const username = "ccvcvcvcvcv";
-  // const password = "nnnnnnnnn";
-  // function register() {
-  //   fetch("https://adventurehub-dev.herokuapp.com/register", {
-  //     method: "POST",
-  //     headers: { "content-type": "application/json" },
-  //     body: JSON.stringify({
-  //       email: email,
-  //       username: username,
-  //       password: password,
-  //     }),
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-  // }
+  function passwordChange(event) {
+    setPassword(event.target.value);
+  }
 
-  // verification page küldjön egy linket a homepagere utána.
+  function emailChange(event) {
+    setEmail(event.target.value);
+  }
 
-  const username = "testElek";
-  const password = "qwert123";
-  function login() {
-    fetch("https://adventurehub-dev.herokuapp.com/login", {
+  function register(event) {
+    event.preventDefault();
+    fetch("https://adventurehub-dev.herokuapp.com/register", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
+        email: email,
         username: username,
         password: password,
       }),
     })
       .then((response) => {
+        if (response.status !== 200) {
+          throw new Error("sikertelen");
+        }
+        console.log(response.status);
         return response.json();
       })
       .then((data) => {
         console.log(data);
+        setMessage("siker");
+      })
+      .catch((error) => {
+        setMessage(error.message);
       });
   }
+
+  // verification page küldjön egy linket a homepagere utána.
+
   return (
     <>
-      <div>
-        <div>
-          <label htmlFor="fName">Name:</label>
-          <input type="text" name="fName" />
-          <label htmlFor="password">Password:</label>
-          <input type="text" name="password" />
-          <label htmlFor="email">Email:</label>
-          <input type="text" name="email" />
+      <div className="listContainer">
+        <header className="listHeader">
+          <img className="listLogo" src={logo} alt="logo" />
+          <div className="listNavigation">
+            {message === "success" ? (
+              ""
+            ) : (
+              <button className="navButton">
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  className="link"
+                  to="/"
+                >
+                  back
+                </Link>
+              </button>
+            )}
+          </div>
+        </header>
+        <div className="welcome">
+          <h1>Join our community.</h1>
         </div>
-        <div>
-          {/* <button onClick={register}>Registration</button> */}
-          <button onClick={login}>Login</button>
-          <button>Cancel</button>
+        <div className="formContainer">
+          <form>
+            <div className="username">
+              <label htmlFor="fName">username:</label>
+              <input type="text" name="fName" onChange={usernameChange} />
+            </div>
+            <div className="password">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                onChange={passwordChange}
+              />
+            </div>
+            <div className="email">
+              <label htmlFor="email">Email:</label>
+              <input type="text" name="email" onChange={emailChange} />
+            </div>
+            <p className="failMessage">
+              {message === "sikertelen" ? "Registration failed" : ""}
+            </p>
+            <div>
+              {message === "siker" ? (
+                ""
+              ) : (
+                <button
+                  className="registButton"
+                  style={{ color: "white" }}
+                  type="submit"
+                  onClick={register}
+                >
+                  Registration
+                </button>
+              )}
+            </div>
+            <div className="verification">
+              {message === "siker" ? (
+                <h3>We sent a werification email to your address.</h3>
+              ) : (
+                ""
+              )}
+            </div>
+          </form>
         </div>
       </div>
     </>

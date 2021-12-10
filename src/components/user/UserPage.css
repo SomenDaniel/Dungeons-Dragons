@@ -1,0 +1,48 @@
+.userContainer {
+  overflow: auto;
+  color: white;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: black;
+}
+
+.userHeader {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  height: 150px;
+}
+
+.userNavigation {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  text-align: right;
+}
+
+.userLogo {
+  width: 75px;
+  height: 75px;
+  display: inline-block;
+  margin-top: 3%;
+  margin-left: 3%;
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+.userCont {
+  width: 100%;
+  grid-column-start: 2;
+  grid-column-end: 2;
+}
+
+.datasUser {
+  text-align: center;
+}
+
+.datasUser h3 {
+  margin-top: 50px;
+  font-size: 15px;
+  color: green;
+}

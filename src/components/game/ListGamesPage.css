@@ -57,9 +57,11 @@
   color: white;
   text-align: center;
   width: 100%;
+  /* margin-bottom: 50px; */
 }
 
 .stories {
+  margin-top: 70px;
   grid-row-start: 2;
   grid-row-end: 2;
   margin-left: 5%;
@@ -76,4 +78,69 @@
 
 .gameData p {
   align-self: center;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  color: white;
+  border: 3px solid white;
+  background: black;
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 380px;
+}
+
+.modalButton {
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.modal h1 {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.formContainer {
+  text-align: left;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.Ccont {
+  margin-bottom: 10px;
+}
+
+.Ccont input {
+  width: 150px;
+  float: right;
+}
+
+.Ccont select {
+  width: 150px;
+  float: right;
+}
+
+.modalButtons {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 300px;
+  margin-left: auto;
+}
+
+#fil {
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+#clo {
+  grid-column-start: 2;
+  grid-column-end: 2;
 }
